@@ -39,3 +39,10 @@ h1 {
 @media (max-width: 560px) {
   .card { height: 100px; }
 }
+
+.card.orange { background: rgb(255, 188, 130); }
+.card.grape { background: plum; }
+.card.banana { background: rgb(252, 252, 161); }
+.card.apple { background: rgb(175, 252, 181); }
+.card.cherry { background: rgb(250, 171, 171); }
+.card.peach { background: rgb(255, 216, 222); }

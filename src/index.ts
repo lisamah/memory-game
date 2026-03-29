@@ -1,6 +1,6 @@
 const board = document.getElementById('game-board')!;
 
-const cards = ["apple", "banana", "cherry", "grape", "orange", "pear"];
+const cards = ["apple", "banana", "cherry", "grape", "orange", "peach"];
 let gameCards = [...cards, ...cards]; // Create pairs of cards
 
 gameCards.sort(() => Math.random() - 0.5); // Shuffle the cards
@@ -26,6 +26,7 @@ function flipCard(card: HTMLElement) {
   if (isChecking || card.innerText !== "?") return; // Ignore if checking or already flipped
 
   card.innerText = card.dataset.symbol!; // Flip the card to show the symbol
+  card.classList.add(card.dataset.symbol!); // Add symbol as CSS class
 
   if (!firstCard) {
     firstCard = card;
@@ -43,14 +44,16 @@ function checkMatch() {
   if (firstCard.dataset.symbol === secondCard.dataset.symbol /* If the symbols match, keep them flipped */) {
     firstCard = null;
     secondCard = null;
-    isChecking = false; // Unlock immediately
+    isChecking = false; // Unlock flipping
   } else {
     setTimeout(() => {
+      firstCard!.classList.remove(firstCard!.dataset.symbol!);
+      secondCard!.classList.remove(secondCard!.dataset.symbol!);
       firstCard!.innerText = "?";
       secondCard!.innerText = "?";
       firstCard = null;
       secondCard = null;
-      isChecking = false; // Unlock after delay
+      isChecking = false; // Unlock flipping
     }, 1000);
   } // If the symbols do not match, flip them back after delay
 }
