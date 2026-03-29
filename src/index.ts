@@ -7,6 +7,7 @@ gameCards.sort(() => Math.random() - 0.5); // Shuffle the cards
 
 let firstCard: HTMLElement | null = null;
 let secondCard: HTMLElement | null = null; // Track the second card
+let isChecking = false; // Prevent flipping more than 2 cards
 
 function createBoard() {
     gameCards.forEach((symbol) => {
@@ -22,7 +23,7 @@ function createBoard() {
 };
 
 function flipCard(card: HTMLElement) {
-  if (card.innerText !== "?") return; // Ignore if the card is already flipped
+  if (isChecking || card.innerText !== "?") return; // Ignore if checking or already flipped
 
   card.innerText = card.dataset.symbol!; // Flip the card to show the symbol
 
@@ -37,15 +38,19 @@ function flipCard(card: HTMLElement) {
 function checkMatch() {
   if (!firstCard || !secondCard) return;
 
+  isChecking = true; // Lock further flips
+
   if (firstCard.dataset.symbol === secondCard.dataset.symbol /* If the symbols match, keep them flipped */) {
     firstCard = null;
     secondCard = null;
+    isChecking = false; // Unlock immediately
   } else {
     setTimeout(() => {
       firstCard!.innerText = "?";
       secondCard!.innerText = "?";
       firstCard = null;
       secondCard = null;
+      isChecking = false; // Unlock after delay
     }, 1000);
   } // If the symbols do not match, flip them back after delay
 }
