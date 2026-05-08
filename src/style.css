@@ -51,6 +51,10 @@ h1 br.break {
   transition-duration: 0.7s
 }
 
+.card img {
+  width: 100%;
+}
+
 .card.flipped {
   background-color: #fff;
   border: #111 solid 3px;
