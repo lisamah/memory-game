@@ -1,48 +1,102 @@
 html, body {
+  background-color: #333;
+  color: #fff;
   font-family: 'Segoe UI', sans-serif;
-  height: 100vh;
-  width: 100vw;
   margin: 0;
   padding: 0;
 }
 
-.container {
-  padding: 0;
+.hidden { display: none; }
+
+.headline {
   margin: 20px;
 }
 
-h1 {
-  text-align: center;
+h1 br.break {
+  display: none;
+}
+
+.reset {
+  background-color: #ccc;
+  border: none;
+  padding: 12px 15px;
+  border-radius: 3px;
+  box-shadow: 0 0 15px #111;
+}
+.reset:hover {
+  box-shadow: inset 0 0 5px #111;
+  cursor: pointer;
 }
 
 .game-board {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(120px, 1fr));
-  gap: 10px;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
   max-width: 100%;
-  width: min(100vw, 530px);
-  margin: 0 auto;
+  margin: 0 20px 20px 20px;
 }
 
 .card {
-  max-width: 100%;
-  height: 175px;
-  background: lightblue;
-  border-radius: 6px;
-  display: flex;
   align-items: center;
-  justify-content: center;
-  font-size: 2rem;
+  border: mediumvioletred solid 3px;
+  box-shadow: 0 0 30px rgb(199, 21, 133, 0.5) inset, 0 0 30px rgb(199, 21, 133, 0.5);
   cursor: pointer;
+  display: flex;
+  font-size: 2rem;
+  justify-content: center;
+  height: 100px;
+}
+.card:hover {
+  background-color: rgba(199, 21, 133, 0.3);
+  transition-duration: 0.7s
 }
 
-@media (max-width: 560px) {
-  .card { height: 100px; }
+.card.flipped {
+  background-color: #fff;
+  border: #111 solid 3px;
+}
+.card.cup {}
+.card.golbat {}
+.card.katze {}
+.card.onigiri {}
+.card.radio {}
+.card.stego {}
+
+
+@media (min-width: 680px) {
+  .game-board {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+  }
+  
+  h1 { font-size: 60px; }
 }
 
-.card.orange { background: rgb(255, 188, 130); }
-.card.grape { background: plum; }
-.card.banana { background: rgb(252, 252, 161); }
-.card.apple { background: rgb(175, 252, 181); }
-.card.cherry { background: rgb(250, 171, 171); }
-.card.peach { background: rgb(255, 216, 222); }
+@media (min-width: 1280px) {
+  html, body {
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+  }
+
+  .headline { 
+    position: absolute;
+    left: 40px;
+    top: 20px;
+  }
+
+  h1 br.break {
+    display: block;
+  }
+
+  .game-board {
+    width: min(100vw, 840px);
+  }
+
+  .card {
+    aspect-ratio: 1/1;
+    height: auto;
+  }
+}

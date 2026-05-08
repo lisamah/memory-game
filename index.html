@@ -7,9 +7,17 @@
     <link rel="stylesheet" href="src/style.css">
 </head>
 <body>
-    <div class="container">
-        <h1>Memory Game</h1>
-        <div id="game-board" class="game-board"></div>
+
+    <div class="headline">
+        <h1>Memory <br class="break"> Game</h1>
+        <button id="reset-button" class="reset">Reset Game</button>
+    </div>
+
+    <div id="game-board" class="game-board"></div>
+
+    <div id="endscreen" class="endscreen hidden">
+        <h2>Congratulations! You Won!</h2>
+        <button id="reset-button" class="reset">Play Again</button>
     </div>
 
     <script src="dist/index.js"></script>
