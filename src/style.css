@@ -1,12 +1,11 @@
 html, body {
   background-color: #333;
   color: #fff;
+  display: grid;
   font-family: 'Segoe UI', sans-serif;
   margin: 0;
   padding: 0;
 }
-
-.hidden { display: none; }
 
 .headline {
   margin: 20px;
@@ -19,9 +18,9 @@ h1 br.break {
 .reset {
   background-color: #ccc;
   border: none;
-  padding: 12px 15px;
   border-radius: 3px;
   box-shadow: 0 0 15px #111;
+  padding: 12px 15px;
 }
 .reset:hover {
   box-shadow: inset 0 0 5px #111;
@@ -40,13 +39,13 @@ h1 br.break {
   align-items: center;
   border: mediumvioletred solid 3px;
   box-shadow: 0 0 30px rgb(199, 21, 133, 0.5) inset, 0 0 30px rgb(199, 21, 133, 0.5);
+  box-sizing: border-box;
   cursor: pointer;
   display: flex;
   font-size: 2rem;
-  justify-content: center;
   height: 100px;
+  justify-content: center;
   overflow: auto;
-  box-sizing: border-box;
 }
 .card:hover {
   background-color: rgba(199, 21, 133, 0.3);
@@ -54,43 +53,68 @@ h1 br.break {
 }
 
 .card img {
-  max-width: 100%;
   max-height: 100%;
+  max-width: 100%;
 }
-
-/*.card.flipped {
-  background-color: #fff;
-  border: #111 solid 3px;
-}*/
 
 .card.cup, .card.golbat, .card.katze, .card.onigiri, .card.radio, .card.stego {
   background-color: #fff;
   border: #111 solid 3px;
 }
-.card.cup {padding: 10px;}
-.card.golbat {padding: 5px;}
-.card.katze {padding: 0 0 25px 50px;}
-.card.onigiri {padding: 30px 25px 25px;}
-.card.radio {padding: 10px;}
-.card.stego {padding: 5px;}
 
+.endscreen {
+  align-items: center;
+  background: rgb(0 0 0 / 75%);
+  display: flex;
+  height: 100%;
+  justify-content: center;
+  position: fixed;
+  width: 100%;
+}
+
+.display {
+  background-color: #fff;
+  border-radius: 3px;
+  box-shadow: 0 0 50px #111;
+  color: #111;
+  padding: 20px 40px 30px;
+}
+
+.bee {
+  width: 150px;
+}
+
+.endscreen .reset {
+  box-shadow: 0 0 5px #111;
+}
+
+.hidden { display: none; }
 
 @media (min-width: 680px) {
+  h1 { font-size: 60px; }
+
   .game-board {
     grid-template-columns: 1fr 1fr 1fr 1fr;
   }
-  
-  h1 { font-size: 60px; }
+
+  .display {
+    min-height: 200px;
+    width: 500px;
+    justify-content: center;
+    flex-flow: column;
+    align-items: center;
+    display: flex;
+  }
 }
 
 @media (min-width: 1280px) {
   html, body {
+    align-items: center;
     box-sizing: border-box;
     display: flex;
-    align-items: center;
+    height: 100%;
     justify-content: center;
     width: 100%;
-    height: 100%;
   }
 
   .headline { 
@@ -111,4 +135,11 @@ h1 br.break {
     aspect-ratio: 1/1;
     height: auto;
   }
+  
+  .card.cup {padding: 10px;}
+  .card.golbat {padding: 5px;}
+  .card.katze {padding: 0 0 25px 50px;}
+  .card.onigiri {padding: 30px 25px 25px;}
+  .card.radio {padding: 10px;}
+  .card.stego {padding: 5px;}
 }

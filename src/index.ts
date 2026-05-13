@@ -1,14 +1,14 @@
 const board = document.getElementById('game-board')!;
- 
+
 const cards = ["cup", "golbat", "onigiri", "radio", "stego", "katze"];
 let gameCards = [...cards, ...cards]; // Create pairs of cards
- 
+
 gameCards.sort(() => Math.random() - 0.5); // Shuffle the cards
- 
+
 let firstCard: HTMLElement | null = null;
 let secondCard: HTMLElement | null = null; // Track the second card
 let isChecking = false; // Prevent flipping more than 2 cards
- 
+
 function createBoard() {
     gameCards.forEach((symbol) => {
         const cardElement = document.createElement('div'); // Create a div
@@ -18,16 +18,16 @@ function createBoard() {
         img.alt = symbol; // Set the alt to the symbol
         cardElement.dataset.symbol = symbol; // Store the symbol
         cardElement.innerText = '?'; // Set question mark on the card
- 
+
         cardElement.addEventListener('click', () => flipCard(cardElement, img)); // Add event listener to flipCard function
- 
+
         board.appendChild(cardElement); // Add the card to the game board
     });
 }
- 
+
 function flipCard(card: HTMLElement, img: HTMLElement) {
     if (isChecking || card.innerText !== "?") return; // Ignore if checking or already flipped
- 
+
     card.innerHTML = img.outerHTML!; // Flip the card to show the symbol
     card.classList.add(card.dataset.symbol!); // Add symbol as CSS class
 
@@ -38,16 +38,17 @@ function flipCard(card: HTMLElement, img: HTMLElement) {
         checkMatch();
     } // Check for a match after flipping the second card
 }
- 
+
 function checkMatch() {
     if (!firstCard || !secondCard) return;
- 
+
     isChecking = true; // Lock further flips
-    
+
     if (firstCard.dataset.symbol === secondCard.dataset.symbol /* If the symbols match, keep them flipped */) {
         firstCard = null;
         secondCard = null;
         isChecking = false; // Unlock flipping
+        checkWin();
     } else {
         setTimeout(() => {
             firstCard!.classList.remove(firstCard!.dataset.symbol!);
@@ -60,8 +61,18 @@ function checkMatch() {
         }, 1000);
     } // If the symbols do not match, flip them back after delay
 }
- 
+
+function checkWin() {
+    const allFlipped = [...document.querySelectorAll('.card')].every(
+        card => (card as HTMLElement).innerText === '?' === false
+    );
+    if (allFlipped) {
+        document.getElementById('endscreen')!.classList.remove('hidden');
+    }
+}
+
 function resetGame() {
+    document.getElementById('endscreen')!.classList.add('hidden');
     firstCard = null;
     secondCard = null;
     isChecking = false;
@@ -70,6 +81,8 @@ function resetGame() {
     createBoard();
 }
 
-document.getElementById('reset-button')!.addEventListener('click', resetGame);
- 
+document.querySelectorAll('.reset').forEach(btn => {
+    btn.addEventListener('click', resetGame);
+});
+
 createBoard();
